@@ -32,7 +32,7 @@ Show help about PostgreSQL commands:
 
 Create a table:
 
-```psql
+```sql
 CREATE TABLE country (
     country_code char(2) PRIMARY KEY,
     country_name text UNIQUE
@@ -41,7 +41,7 @@ CREATE TABLE country (
 
 Inserting data:
 
-```psql
+```sql
 INSERT INTO country (country_code, country_name)
 VALUES ('ch', 'Switzerland'), ('de', 'Germany'), ('us', 'United States'),
        ('at', 'Austria'), ('it', 'Italy'), ('ml', 'Molvania');
@@ -49,19 +49,19 @@ VALUES ('ch', 'Switzerland'), ('de', 'Germany'), ('us', 'United States'),
 
 Query data:
 
-```psql
+```sql
 SELECT * FROM country;
 ```
 
 Delete data:
 
-```psql
+```sql
 DELETE FROM country WHERE country_code = 'ml';
 ```
 
 Create a table with a foreign key and a compound primary key:
 
-```psql
+```sql
 CREATE TABLE city (
     name text NOT NULL,
     postal_code varchar(9) CHECK (postal_code <> ''),
@@ -72,27 +72,27 @@ CREATE TABLE city (
 
 Insert data with a reference (ok):
 
-```psql
+```sql
 INSERT INTO city (name, postal_code, country_code)
 VALUES ('Zurich', '8001', 'ch'), ('Berlin', '10115', 'de'), ('Vienna', '1010', 'at');
 ```
 
 Insert data without a reference (failure):
 
-```psql
+```sql
 INSERT INTO city (name, postal_code, country_code)
 VALUES ('Paris', '75000', NULL), ('Toronto', '66777', NULL), ('Lima', '02002', NULL);
 ```
 
 Update data:
 
-```psql
+```sql
 UPDATE city SET postal_code = '8000' WHERE name = 'Zurich';
 ```
 
 Join read:
 
-```psql
+```sql
 SELECT city.*, country_name
 FROM city
 INNER JOIN country ON city.country_code = country.country_code;
